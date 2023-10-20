@@ -10,6 +10,8 @@ docker run -d --net mjapi --name mj-server -p 8062:8062 \
 	-e CHANNEL_ID="" \
 	-e CONCUR_SIZE=3 \
 	-e WAIT_SIZE=10 \
+  -v /etc/localtime:/etc/localtime \
+  -v "/data/mj/mj-server:/app/log" \
 	hongchenker/midjourney-api:1.0
 
 docker run -d --net mjapi --name mj-bot \
@@ -21,4 +23,6 @@ docker run -d --net mjapi --name mj-bot \
 	-e CHANNEL_ID="" \
 	-e CALLBACK_URL="" \
 	-e QUEUE_RELEASE_API="http://mj-server:8062/v1/api/trigger/queue/release" \
+  -v /etc/localtime:/etc/localtime \
+  -v "/data/mj/mj-bot:/app/log" \
 	hongchenker/midjourney-api:1.0 bot
