@@ -44,7 +44,7 @@ async def fetch(
         url: str,
         method: str = FetchMethod.post, **kwargs
 ) -> Union[bool, None]:
-    logger.debug(f"Fetch: {url}, {kwargs}")
+    logger.debug(f"Fetch: {method}, {url}, {kwargs}")
     async with session.request(method, url, **kwargs) as resp:
         if not resp.ok:
             return None

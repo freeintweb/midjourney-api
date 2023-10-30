@@ -4,7 +4,7 @@ from typing import Dict, Any, Union
 
 import aiohttp
 
-from lib.api import CHANNEL_ID, USER_TOKEN, GUILD_ID
+from lib.api import CHANNEL_ID, USER_TOKEN, GUILD_ID, SESSION_ID
 from util.fetch import fetch, fetch_json, FetchMethod
 
 TRIGGER_URL = "https://discord.com/api/v9/interactions"
@@ -102,7 +102,7 @@ def _trigger_payload(type_: int, data: Dict[str, Any], **kwargs) -> Dict[str, An
         "application_id": "936929561302675456",
         "guild_id": GUILD_ID,
         "channel_id": CHANNEL_ID,
-        "session_id": "cb06f61453064c0983f2adae2a88c223",
+        "session_id": SESSION_ID,
         "data": data
     }
     payload.update(kwargs)
@@ -110,8 +110,9 @@ def _trigger_payload(type_: int, data: Dict[str, Any], **kwargs) -> Dict[str, An
 
 
 async def generate(prompt: str, **kwargs):
+    null = None
     payload = _trigger_payload(2, {
-        "version": "1118961510123847772",
+        "version": "1166847114203123795",
         "id": "938956540159881230",
         "name": "imagine",
         "type": 1,
@@ -120,6 +121,29 @@ async def generate(prompt: str, **kwargs):
             "name": "prompt",
             "value": prompt
         }],
+        "application_command": {
+            "id": "938956540159881230",
+            "application_id": "936929561302675456",
+            "version": "1166847114203123795",
+            "default_member_permissions": null,
+            "type": 1,
+            "nsfw": False,
+            "name": "imagine",
+            "description": "Create images with Midjourney",
+            "dm_permission": True,
+            "contexts": null,
+            "integration_types":[
+                0
+            ],
+            "options":[
+                {
+                    "type": 3,
+                    "name": "prompt",
+                    "description": "The prompt to imagine",
+                    "required": True
+                }
+            ]
+        },
         "attachments": []
     })
     return await trigger(payload)

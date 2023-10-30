@@ -8,6 +8,7 @@ docker run -d --net mjapi --name mj-server -p 8062:8062 \
 	-e USER_TOKEN="" \
 	-e GUILD_ID="" \
 	-e CHANNEL_ID="" \
+	-e SESSION_ID="" \
 	-e CONCUR_SIZE=3 \
 	-e WAIT_SIZE=10 \
   -v /etc/localtime:/etc/localtime \
@@ -21,6 +22,7 @@ docker run -d --net mjapi --name mj-bot \
 	-e BOT_TOKEN="" \
 	-e GUILD_ID="" \
 	-e CHANNEL_ID="" \
+	-e SESSION_ID="" \
 	-e CALLBACK_URL="" \
 	-e QUEUE_RELEASE_API="http://mj-server:8062/v1/api/trigger/queue/release" \
   -v /etc/localtime:/etc/localtime \
